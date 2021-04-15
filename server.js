@@ -34,3 +34,24 @@ app.get('/employees', (req, res)=>{
         }
     })
 });
+
+app.get('/employees/:id', (req, res)=>{
+    mysqlConnection.query('select * from employee where EmpID = ?',[req.params.id],(err, rows, filed)=>{
+        if (!err) {
+            res.send(rows)
+        }else{
+            res.send(err);
+        }
+    })
+});
+
+app.delete('/employees/:id', (req, res)=>{
+    mysqlConnection.query('delete from employee where EmpID = ?',[req.params.id],(err, rows, filed)=>{
+        if (!err) {
+            res.send("Delete Sucessfully..!")
+        }else{
+            res.send(err);
+        }
+    })
+});
+
